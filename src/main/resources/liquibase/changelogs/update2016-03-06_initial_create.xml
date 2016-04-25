@@ -1,0 +1,86 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+    <changeSet id="create_user" author="i.segodin" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="user"/>
+            </not>
+        </preConditions>
+        <createTable tableName="user">
+
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+
+            <column name="first_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="second_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <modifySql dbms="mysql">
+            <append value="ENGINE=INNODB CHARSET=utf8 COLLATE utf8_general_ci"/>
+        </modifySql>
+    </changeSet>
+
+
+    <changeSet id="insert_user" author="i.segodin" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">select count(*) from user where email = 'admin@4finance.com'</sqlCheck>
+        </preConditions>
+        <insert tableName="user">
+            <column name="first_name" value="Admin"/>
+            <column name="second_name" value="4finance"/>
+            <column name="email" value="admin@4finance.com"/>
+            <column name="password" value="018214b676ee91157ae734818d9cbbe6f9da6e5ec23eb8fb5c45b62e04017201ab23a54a48734b26"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet id="create_loan" author="i.segodin" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="loan"/>
+            </not>
+        </preConditions>
+        <createTable tableName="loan">
+
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+
+            <column name="id_user" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="amount" type="double">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="application_date" type="datetime" defaultValueDate="now()">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="expire_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <modifySql dbms="mysql">
+            <append value="ENGINE=INNODB CHARSET=utf8 COLLATE utf8_general_ci"/>
+        </modifySql>
+    </changeSet>
+
+</databaseChangeLog>
