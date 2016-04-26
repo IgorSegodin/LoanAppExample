@@ -1,6 +1,8 @@
 Gradle version: 2.13
 Database: MySQL
 
+Default database user: root
+Default database password: root
 Default database name: four_finance
 Default port: 8081
 
@@ -13,6 +15,9 @@ Jar will be created in build/libs folder.
 You can override default port: 'java -jar loan-app-0.0.1.jar --server.port=8083'.
 Same for all other parameters from application.properties, like 'spring.datasource.url' or 'spring.datasource.username'.
 
+
+React redux doc
+https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
 
 
 

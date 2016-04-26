@@ -4,6 +4,8 @@ import org.segodin.fourFinance.loanApp.data.domain.User;
 import org.segodin.fourFinance.loanApp.repository.UserRepository;
 import org.segodin.fourFinance.loanApp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
@@ -21,5 +23,13 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException("Can't find user with email: " + email);
         }
         return user;
+    }
+
+    public User getCurrentUser() throws AuthenticationCredentialsNotFoundException {
+        if (SecurityContextHolder.getContext() != null && SecurityContextHolder.getContext().getAuthentication() != null) {
+            return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } else {
+            throw new AuthenticationCredentialsNotFoundException("Not authenticated.");
+        }
     }
 }
