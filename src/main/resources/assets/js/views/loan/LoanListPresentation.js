@@ -26,37 +26,48 @@ import TableRowColumn from 'material-ui/Table/TableRowColumn';
 import DateUtil from 'js/util/DateUtil';
 
 export default (props) => (
-    <Grid fluid={true}>
-        <Row>
-            <Col md={6} lg={6}>
-                <Table selectable={false}>
-                    <TableHeader displaySelectAll={false}>
-                        <TableRow>
-                            <TableHeaderColumn tooltip="Amount">Amount</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Application date">Application date</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Expiration date">Expiration date</TableHeaderColumn>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody displayRowCheckbox={false} stripedRows={true}>
-                        {
-                            props.dataList ? (
-                                props.dataList.map((row, index) => (
-                                    <TableRow key={index}>
-                                        <TableRowColumn>{row.amount} $</TableRowColumn>
-                                        <TableRowColumn>{DateUtil.formatDateTime(row.applicationDate)}</TableRowColumn>
-                                        <TableRowColumn>{DateUtil.formatDateTime(row.expireDate)}</TableRowColumn>
-                                    </TableRow>
-                                ))
-                            ) : (
-                                <TableRow key="-1">
-                                    <TableRowColumn>Data loading...</TableRowColumn>
+    <Table selectable={false}>
+        <TableHeader displaySelectAll={false}>
+            <TableRow>
+                <TableHeaderColumn tooltip="Amount">Amount</TableHeaderColumn>
+                <TableHeaderColumn tooltip="Application date">Application date</TableHeaderColumn>
+                <TableHeaderColumn tooltip="Expiration date">Expiration date</TableHeaderColumn>
+                <TableHeaderColumn tooltip="IP address">IP Address</TableHeaderColumn>
+            </TableRow>
+        </TableHeader>
+        <TableBody displayRowCheckbox={false} stripedRows={true}>
+            {
+                props.tableData.error ? (
+                    <TableRow key="-3">
+                        <TableRowColumn><span style={{color: "red"}}>{props.tableData.error}</span></TableRowColumn>
+                    </TableRow>
+                ) : (
+                    // If dataList is null, then it is first loading
+                    props.tableData.list ? (
+                        props.tableData.list.length > 0 ? (
+                            props.tableData.list.map((row, index) => (
+                                <TableRow key={index}>
+                                    <TableRowColumn>{row.amount} $</TableRowColumn>
+                                    <TableRowColumn>{DateUtil.formatDateTime(row.applicationDate)}</TableRowColumn>
+                                    <TableRowColumn>{DateUtil.formatDateTime(row.expireDate)}</TableRowColumn>
+                                    <TableRowColumn>{row.ipAddress}</TableRowColumn>
                                 </TableRow>
-                            )
-                        }
-                    </TableBody>
-                </Table>
-            </Col>
-        </Row>
-    </Grid>
+                            ))
+                        ) : (
+                            // empty result
+                            <TableRow key="-2">
+                                <TableRowColumn>No data available.</TableRowColumn>
+                            </TableRow>
+                        )
+                    ) : (
+                        // props.dataList is null
+                        <TableRow key="-1">
+                            <TableRowColumn>Data loading...</TableRowColumn>
+                        </TableRow>
+                    )
+                )
+            }
+        </TableBody>
+    </Table>
 );
 

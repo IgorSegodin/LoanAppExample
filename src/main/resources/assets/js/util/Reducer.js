@@ -16,7 +16,7 @@ export default function() {
             default : {
                 const reducer = internalReduceMap[action.type];
                 if (reducer) {
-                    return reducer(state, action);
+                    return Object.assign({}, state, reducer(state, action));
                 } else {
                     console.warn("Unmapped action '" + action.type + "'.");
                 }

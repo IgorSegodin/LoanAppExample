@@ -39,7 +39,7 @@ class LoginForm extends React.Component {
                                 <br/>
                                 <TextField name="password" floatingLabelText="Password"/>
                                 <br/>
-                                <RaisedButton label="Login" onClick={this.loginClick.bind(this)}/>
+                                <RaisedButton label="Login" onClick={this.loginClick}/>
                             </form>
                         </Paper>
                     </Col>
@@ -48,9 +48,10 @@ class LoginForm extends React.Component {
         )
     }
 
-    loginClick() {
+    loginClick =() => {
+        // TODO client validation
         this.refs.form.submit();
-    }
+    };
 }
 
 document.addEventListener('DOMContentLoaded', function () {

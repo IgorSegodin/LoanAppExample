@@ -25,6 +25,9 @@ public class Loan extends Identifier {
     @Column(name = "expire_date")
     private Date expireDate;
 
+    @Column(name = "ip_address")
+    private String ipAddress;
+
     public User getUser() {
         return user;
     }
@@ -55,5 +58,13 @@ public class Loan extends Identifier {
 
     public void setExpireDate(Date expireDate) {
         this.expireDate = expireDate;
+    }
+
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
     }
 }

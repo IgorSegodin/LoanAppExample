@@ -19,5 +19,8 @@ Same for all other parameters from application.properties, like 'spring.datasour
 React redux doc
 https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
 
+React thunk doc
+https://github.com/gaearon/redux-thunk
+
 
 

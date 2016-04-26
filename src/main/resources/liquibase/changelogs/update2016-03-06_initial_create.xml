@@ -77,6 +77,10 @@
             <column name="expire_date" type="datetime">
                 <constraints nullable="false"/>
             </column>
+
+            <column name="ip_address" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
         <modifySql dbms="mysql">
             <append value="ENGINE=INNODB CHARSET=utf8 COLLATE utf8_general_ci"/>
