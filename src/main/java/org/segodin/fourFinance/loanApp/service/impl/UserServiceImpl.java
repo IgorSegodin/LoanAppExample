@@ -9,6 +9,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Component
 public class UserServiceImpl implements UserService {
@@ -31,5 +35,12 @@ public class UserServiceImpl implements UserService {
         } else {
             throw new AuthenticationCredentialsNotFoundException("Not authenticated.");
         }
+    }
+
+    @Override
+    public String getCurrentIp() {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+                .getRequest();
+        return request.getRemoteAddr();
     }
 }

@@ -18,6 +18,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 
+import DateUtil from 'js/util/DateUtil';
+
 export default (props) => (
     <Dialog title="Create new loan application"
             actions={[
@@ -61,9 +63,9 @@ export default (props) => (
                 <Col>
                     <DatePicker name="expireDate"
                                 hintText="Expiration date"
-                                value={props.data.expireDate}
+                                value={props.data.expireDate ? DateUtil.parseDateTime(props.data.expireDate) : null}
                                 onChange={function(nill, date) {
-                                    props.inputChange({expireDate: date});
+                                    props.inputChange({expireDate: DateUtil.formatDateTime(date)});
                                 }}
                                 autoOk={true}/>
                 </Col>

@@ -1,8 +1,12 @@
 package org.segodin.fourFinance.loanApp.data.dto;
 
+import org.segodin.fourFinance.loanApp.data.validation.LowRiskLoan;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 import javax.validation.constraints.NotNull;
 
+@LowRiskLoan
 public class LoanCreateDto {
 
     @NotNull
@@ -10,7 +14,7 @@ public class LoanCreateDto {
     private Double amount;
 
     @NotNull
-    private Date expireDate;
+    private LocalDateTime expireDate;
 
     public Double getAmount() {
         return amount;
@@ -20,11 +24,11 @@ public class LoanCreateDto {
         this.amount = amount;
     }
 
-    public Date getExpireDate() {
+    public LocalDateTime getExpireDate() {
         return expireDate;
     }
 
-    public void setExpireDate(Date expireDate) {
+    public void setExpireDate(LocalDateTime expireDate) {
         this.expireDate = expireDate;
     }
 }
