@@ -19,6 +19,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 
 class LoginForm extends React.Component {
+
     render() {
         return (
             <Grid fluid={true}>
@@ -33,18 +34,22 @@ class LoginForm extends React.Component {
                                 : null
                             }
                             <b>Login:</b>
-                            <form action="/process-login" method="POST">
+                            <form action="/process-login" method="POST" ref="form">
                                 <TextField name="email" floatingLabelText="Email"/>
                                 <br/>
                                 <TextField name="password" floatingLabelText="Password"/>
                                 <br/>
-                                <button type="submit">Login</button>
+                                <RaisedButton label="Login" onClick={this.loginClick.bind(this)}/>
                             </form>
                         </Paper>
                     </Col>
                 </Row>
             </Grid>
         )
+    }
+
+    loginClick() {
+        this.refs.form.submit();
     }
 }
 
