@@ -55,6 +55,7 @@ node {
     npmVersion = "${npmVersion}"
     distBaseUrl = "${nodeDistinationUrl}"
     download = true
+    workDir = file("${project.buildDir}/nodejs")
 }
 
 task bundle(type: NpmTask) {
