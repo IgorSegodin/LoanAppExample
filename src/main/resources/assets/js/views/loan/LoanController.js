@@ -30,7 +30,7 @@ class LoanListController extends React.Component {
     }
 
     render() {
-        return <LoanPresentation tableData={this.props.tableData}
+        return <LoanPresentation tableData={Object.assign({deleteLoanCallback: this.props.deleteLoan}, this.props.tableData)}
                                  dialogData={Object.assign({
                                         showApplyDialogCallback: this.props.showApplyDialog,
                                         hideApplyDialogCallback: this.props.hideApplyDialog,
@@ -86,6 +86,21 @@ class LoanListController extends React.Component {
             },
             changeInputApplyDialog: (data) => {
                 dispatch({type: ACTION_CHANGE_INPUT_APPLY_DIALOG, data: data});
+            },
+            deleteLoan: (loanId) => {
+                dispatch(function(dispatch, getState) {
+                    return jQuery.ajax({
+                        method: "DELETE",
+                        url: UrlUtil.get(AppConfig.baseUrl, "/loan?id=" + loanId)
+                    })
+                        .then(function (object) {
+                            NotifyUtil.success("Loan was deleted.");
+                            LoanListController.loadTableDataAndDispatch(dispatch);
+                        })
+                        .fail(function (response) {
+                            NotifyUtil.error(response.status + " " + response.statusText);
+                        });
+                });
             }
         }
     }

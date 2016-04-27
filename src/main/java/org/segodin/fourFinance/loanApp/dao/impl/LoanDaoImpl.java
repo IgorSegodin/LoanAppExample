@@ -41,4 +41,14 @@ public class LoanDaoImpl extends AbstractDao implements LoanDao {
                 .uniqueResult())
                 .intValue();
     }
+
+    @Override
+    public boolean isOwner(Long userId, Long loanId) {
+        return ((Number) getSession().createCriteria(Loan.class, "l")
+                .setProjection(Projections.rowCount())
+                .add(Restrictions.eq("user.id", userId))
+                .add(Restrictions.eq("id", loanId))
+                .uniqueResult())
+                .intValue() > 0;
+    }
 }

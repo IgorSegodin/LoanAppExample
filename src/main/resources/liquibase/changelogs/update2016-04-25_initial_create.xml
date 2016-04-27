@@ -3,7 +3,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
 
-    <changeSet id="create_user" author="i.segodin" runOnChange="true">
+    <changeSet id="update2016-04-25_initial_create_user" author="i.segodin" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="user"/>
@@ -37,7 +37,7 @@
     </changeSet>
 
 
-    <changeSet id="insert_user" author="i.segodin" runOnChange="true">
+    <changeSet id="update2016-04-25_initial_create_insert_user" author="i.segodin" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">select count(*) from user where email = 'admin@4finance.com'</sqlCheck>
         </preConditions>
@@ -50,7 +50,7 @@
     </changeSet>
 
 
-    <changeSet id="create_loan" author="i.segodin" runOnChange="true">
+    <changeSet id="update2016-04-25_initial_create_loan" author="i.segodin" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="loan"/>

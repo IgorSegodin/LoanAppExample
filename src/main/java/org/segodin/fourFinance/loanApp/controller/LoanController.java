@@ -6,8 +6,10 @@ import org.segodin.fourFinance.loanApp.repository.LoanRepository;
 import org.segodin.fourFinance.loanApp.service.UserService;
 import org.segodin.fourFinance.loanApp.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +40,12 @@ public class LoanController {
         loan.setUser(userService.getCurrentUser());
         loan.setIpAddress(request.getRemoteAddr());
         return loanRepository.save(loan);
+    }
+
+    @RequestMapping(value = "/loan", method = RequestMethod.DELETE)
+    @PreAuthorize("@aclLoan.isCanDelete(#id)")
+    public void deleteLoan(@RequestParam Long id) {
+        loanRepository.delete(id);
     }
 
 }

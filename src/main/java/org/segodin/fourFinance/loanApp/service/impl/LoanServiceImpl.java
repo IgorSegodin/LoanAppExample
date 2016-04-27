@@ -82,4 +82,10 @@ public class LoanServiceImpl implements LoanService, InitializingBean {
         );
         return dailyAmount >= maxDailyApplicationPerIp;
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean isOwner(Long userId, Long loanId) {
+        return loanDao.isOwner(userId, loanId);
+    }
 }

@@ -1,0 +1,18 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+    <changeSet id="update2016-04-27_additional_user_create" author="i.segodin" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">select count(*) from user where email = 'user@4finance.com'</sqlCheck>
+        </preConditions>
+        <insert tableName="user">
+            <column name="first_name" value="User"/>
+            <column name="second_name" value="4finance"/>
+            <column name="email" value="user@4finance.com"/>
+            <column name="password" value="018214b676ee91157ae734818d9cbbe6f9da6e5ec23eb8fb5c45b62e04017201ab23a54a48734b26"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

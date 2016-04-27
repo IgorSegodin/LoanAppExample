@@ -17,4 +17,6 @@ public interface LoanService {
      * @return true if current user already has more applications than daily limit with same IP address
      * */
     boolean isExceedsDailyLimitForIp();
+
+    boolean isOwner(Long userId, Long loanId);
 }

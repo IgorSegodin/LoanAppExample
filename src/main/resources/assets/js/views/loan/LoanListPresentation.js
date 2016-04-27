@@ -23,6 +23,8 @@ import TableRow from 'material-ui/Table/TableRow';
 import TableHeaderColumn from 'material-ui/Table/TableHeaderColumn';
 import TableRowColumn from 'material-ui/Table/TableRowColumn';
 
+import FlatButton from 'material-ui/FlatButton';
+
 import DateUtil from 'js/util/DateUtil';
 
 export default (props) => (
@@ -33,6 +35,7 @@ export default (props) => (
                 <TableHeaderColumn tooltip="Application date">Application date</TableHeaderColumn>
                 <TableHeaderColumn tooltip="Expiration date">Expiration date</TableHeaderColumn>
                 <TableHeaderColumn tooltip="IP address">IP Address</TableHeaderColumn>
+                <TableHeaderColumn tooltip="Actions">Actions</TableHeaderColumn>
             </TableRow>
         </TableHeader>
         <TableBody displayRowCheckbox={false} stripedRows={true}>
@@ -51,6 +54,13 @@ export default (props) => (
                                     <TableRowColumn>{DateUtil.formatDateTime(row.applicationDate)}</TableRowColumn>
                                     <TableRowColumn>{DateUtil.formatDateTime(row.expireDate)}</TableRowColumn>
                                     <TableRowColumn>{row.ipAddress}</TableRowColumn>
+                                    <TableRowColumn>
+                                        <FlatButton
+                                            label="Delete"
+                                            primary={true}
+                                            onClick={function() {props.tableData.deleteLoanCallback(row.id);}}
+                                            />
+                                    </TableRowColumn>
                                 </TableRow>
                             ))
                         ) : (

@@ -1,6 +1,7 @@
 Tested on
 Gradle version: 2.13
 Database: MySQL 5.6
+Java: 1.8
 Environment: Windows 7
 Browser: Chrome 49
 
@@ -11,6 +12,9 @@ Default port: 8081
 
 Default user: admin@4finance.com
 Default password: 12345+
+
+Additional user: user@4finance.com
+Additional user password: 12345+
 
 For development use gradle task 'bootRun' with variable -Dprofile=dev .
 For javascript hot reload you should run separate task 'bundleWatch' with variable -Dprofile=dev. If reloading doesn't happened in IntellijIdea, try to press ctrl + s (save).
