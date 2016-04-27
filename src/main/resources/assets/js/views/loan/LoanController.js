@@ -6,6 +6,8 @@ import jQuery from 'jquery';
 
 import LoanPresentation from 'js/views/loan/LoanPresentation';
 
+import ExceptionUtil from 'js/util/ExceptionUtil';
+
 const formatActionType = (type) => {
     return `js/views/loan/LoanListController:${type}`;
 };
@@ -45,7 +47,7 @@ class LoanListController extends React.Component {
                 dispatch({type: ACTION_DATA_LOAD, list: object})
             })
             .fail(function (response) {
-                dispatch({type: ACTION_DATA_LOAD, error: response.responseText})
+                dispatch({type: ACTION_DATA_LOAD, error: ExceptionUtil.getErrorDescription(response)})
             });
     }
 
@@ -72,7 +74,7 @@ class LoanListController extends React.Component {
                             LoanListController.loadTableDataAndDispatch(dispatch);
                         })
                         .fail(function (response) {
-                            dispatch({type: ACTION_SUBMIT_APPLY_DIALOG_ERROR, error: response.responseText});
+                            dispatch({type: ACTION_SUBMIT_APPLY_DIALOG_ERROR, error: ExceptionUtil.getErrorDescription(response)});
                         });
                 });
             },

@@ -63,6 +63,7 @@ export default (props) => (
                 <Col>
                     <DatePicker name="expireDate"
                                 hintText="Expiration date"
+                                minDate={new Date()}
                                 value={props.data.expireDate ? DateUtil.parseDateTime(props.data.expireDate) : null}
                                 onChange={function(nill, date) {
                                     props.inputChange({expireDate: DateUtil.formatDateTime(date)});

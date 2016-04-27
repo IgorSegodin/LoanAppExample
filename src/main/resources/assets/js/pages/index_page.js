@@ -11,7 +11,7 @@ const MuiTheme = getMuiTheme();
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
-import Reducer from 'js/util/Reducer';
+import Reducer from 'js/core/Reducer';
 
 import LoanController from 'js/views/loan/LoanController';
 
