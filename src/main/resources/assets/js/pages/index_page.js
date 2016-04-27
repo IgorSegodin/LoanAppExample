@@ -11,6 +11,8 @@ const MuiTheme = getMuiTheme();
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
+import {NotificationContainer} from 'react-notifications';
+
 import Reducer from 'js/core/Reducer';
 
 import LoanController from 'js/views/loan/LoanController';
@@ -22,7 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
     ReactDOM.render(
         <Provider store={store}>
             <MuiThemeProvider muiTheme={MuiTheme}>
-                <LoanController provideReducerMap={(reducerMap) => {reducer.register(reducerMap)}}/>
+                <div>
+                    <LoanController provideReducerMap={(reducerMap) => {reducer.register(reducerMap)}}/>
+                    <NotificationContainer/>
+                </div>
             </MuiThemeProvider>
         </Provider>,
         document.getElementById("bodyContainer")

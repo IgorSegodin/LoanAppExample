@@ -6,7 +6,10 @@ import jQuery from 'jquery';
 
 import LoanPresentation from 'js/views/loan/LoanPresentation';
 
+import AppConfig from 'js/core/AppConfig';
 import ExceptionUtil from 'js/util/ExceptionUtil';
+import UrlUtil from 'js/util/UrlUtil';
+import NotifyUtil from 'js/util/NotifyUtil';
 
 const formatActionType = (type) => {
     return `js/views/loan/LoanListController:${type}`;
@@ -41,12 +44,13 @@ class LoanListController extends React.Component {
     static loadTableDataAndDispatch(dispatch) {
         return jQuery.ajax({
             method: "POST",
-            url: "/loan/list.json"
+            url: UrlUtil.get(AppConfig.baseUrl, "/loan/list.json")
         })
             .then(function (object) {
                 dispatch({type: ACTION_DATA_LOAD, list: object})
             })
             .fail(function (response) {
+                NotifyUtil.error(response.status + " " + response.statusText);
                 dispatch({type: ACTION_DATA_LOAD, error: ExceptionUtil.getErrorDescription(response)})
             });
     }
@@ -66,14 +70,16 @@ class LoanListController extends React.Component {
                 dispatch(function(dispatch, getState) {
                     return jQuery.ajax({
                         method: "POST",
-                        url: "/loan/apply.json",
+                        url: UrlUtil.get(AppConfig.baseUrl, "/loan/apply.json"),
                         data: getState().loanDialogData
                     })
                         .then(function (object) {
+                            NotifyUtil.success("Loan application was created.");
                             dispatch({type: ACTION_TOGGLE_APPLY_DIALOG, open: false});
                             LoanListController.loadTableDataAndDispatch(dispatch);
                         })
                         .fail(function (response) {
+                            NotifyUtil.error(response.status + " " + response.statusText);
                             dispatch({type: ACTION_SUBMIT_APPLY_DIALOG_ERROR, error: ExceptionUtil.getErrorDescription(response)});
                         });
                 });

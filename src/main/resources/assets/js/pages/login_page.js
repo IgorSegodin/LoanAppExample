@@ -17,6 +17,9 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
+import AppConfig from 'js/core/AppConfig';
+import UrlUtil from 'js/util/UrlUtil';
+
 
 class LoginForm extends React.Component {
 
@@ -34,7 +37,7 @@ class LoginForm extends React.Component {
                                 : null
                             }
                             <b>Login:</b>
-                            <form action="/process-login" method="POST" ref="form">
+                            <form action={UrlUtil.get(AppConfig.baseUrl, "/process-login")} method="POST" ref="form">
                                 <TextField name="email" floatingLabelText="Email"/>
                                 <br/>
                                 <TextField name="password" floatingLabelText="Password"/>
