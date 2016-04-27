@@ -19,7 +19,7 @@ Additional user password: 12345+
 For development use gradle task 'bootRun' with variable -Dprofile=dev .
 For javascript hot reload you should run separate task 'bundleWatch' with variable -Dprofile=dev. If reloading doesn't happened in IntellijIdea, try to press ctrl + s (save).
 Sometimes node and gradle processes are not stopped correctly (known issue in gradle + Idea i guess), it can lead to build errors, so you should kill them manually from time to time.
-For use on server run 'build' task, then to start application, use cmd command: 'java -jar loan-app-0.0.1.jar' .
+For use on server run 'build' task, you can use gradle wrapper 'gradlew', then to start application, use cmd command: 'java -jar loan-app-0.0.1.jar' .
 Jar will be created in build/libs folder.
 You can override default port: 'java -jar loan-app-0.0.1.jar --server.port=8083'.
 Same for all other parameters from application.properties, like 'spring.datasource.url' or 'spring.datasource.username'.
